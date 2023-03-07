@@ -1,0 +1,76 @@
+.scrollList {
+   position: relative;
+   height: fit-content;
+   overflow: auto;
+   display: block;
+}
+
+table {
+   display: block;
+   margin-top: 0.25rem;
+
+   tbody {
+      display: block;
+      height: 65vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+   }
+
+   tbody::-webkit-scrollbar {
+      display: none;
+   }
+}
+
+.tableRow {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+
+   background-color: #fff;
+   border-radius: 0.5rem;
+   padding: 0.75rem;
+   margin-bottom: 0.75rem;
+}
+
+.tableData {
+   display: flex;
+   align-items: center;
+   gap: 0.75rem;
+   font-size: 1.15rem;
+
+   .checkboxInput {
+      width: 1rem;
+      height: 1rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
+
+      &:checked + label {
+         text-decoration: line-through;
+         opacity: 0.7;
+      }
+   }
+}
+
+.tableIcons {
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+}
+
+.editTrigger {
+   background-color: transparent;
+   border: 0;
+   outline: none;
+}
+
+.tableEdit {
+   line-height: 0;
+   color: var(--green);
+   cursor: pointer;
+}
+
+.tableDelete {
+   line-height: 0;
+   color: var(--red);
+   cursor: pointer;
+}
