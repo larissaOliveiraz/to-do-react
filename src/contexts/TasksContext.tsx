@@ -1,5 +1,5 @@
+import axios from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { api } from "../libs/axios";
 import { Todo } from "../types/Todo";
 
 type TasksContextType = {
@@ -28,12 +28,12 @@ export const TasksProvider = ({ children }: TasksProviderProps) => {
    const [filteredTasks, setFilteredTasks] = useState<Todo[]>([]);
 
    const getTasks = async () => {
-      const { data } = await api.get("/todos");
+      const { data } = await axios.get("https://todo-db.vercel.app/todos");
       setTasks(data);
    };
 
    const searchTasks = async (taskName: string) => {
-      const { data } = await api.get("/todos");
+      const { data } = await axios.get("https://todo-db.vercel.app/todos");
 
       const filteredData = data.filter(
          (task: Todo) =>
@@ -43,7 +43,7 @@ export const TasksProvider = ({ children }: TasksProviderProps) => {
    };
 
    const addTask = async (taskName: string) => {
-      const { data } = await api.post("/todos", {
+      const { data } = await axios.post("https://todo-db.vercel.app/todos", {
          description: taskName,
          checked: false,
          createdAt: new Date(),
@@ -52,7 +52,7 @@ export const TasksProvider = ({ children }: TasksProviderProps) => {
    };
 
    const editTask = async (taskId: number, taskName: string) => {
-      await api.put(`/todos/${taskId}`, {
+      await axios.put(`https://todo-db.vercel.app/todos/${taskId}`, {
          description: taskName,
          createdAt: new Date(),
       });
@@ -64,7 +64,7 @@ export const TasksProvider = ({ children }: TasksProviderProps) => {
       taskName: string,
       taskChecked: boolean
    ) => {
-      await api.put(`/todos/${taskId}`, {
+      await axios.put(`https://todo-db.vercel.app/todos/${taskId}`, {
          description: taskName,
          checked: !taskChecked,
          createdAt: new Date(),
@@ -73,7 +73,7 @@ export const TasksProvider = ({ children }: TasksProviderProps) => {
    };
 
    const deleteTask = async (taskId: number) => {
-      await api.delete(`/todos/${taskId}`);
+      await axios.delete(`https://todo-db.vercel.app/todos/${taskId}`);
       getTasks();
    };
 

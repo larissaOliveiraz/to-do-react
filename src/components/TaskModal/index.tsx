@@ -2,7 +2,6 @@ import { X } from "@phosphor-icons/react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { KeyboardEvent, useContext, useState } from "react";
 import { TasksContext } from "../../contexts/TasksContext";
-import { api } from "../../libs/axios";
 import { Todo } from "../../types/Todo";
 import styles from "./styles.module.scss";
 

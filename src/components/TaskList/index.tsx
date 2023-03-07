@@ -5,7 +5,6 @@ import { TasksContext } from "../../contexts/TasksContext";
 import * as Dialog from "@radix-ui/react-dialog";
 import { TaskModal } from "../TaskModal";
 import { Todo } from "../../types/Todo";
-import { api } from "../../libs/axios";
 
 type Props = {
    tasksData: Todo[];

@@ -2,7 +2,6 @@ import { Check, PencilSimpleLine, TrashSimple } from "@phosphor-icons/react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Header } from "../../components/Header";
-import { api } from "../../libs/axios";
 import { Todo as TodoType } from "../../types/Todo";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import styles from "./styles.module.scss";
@@ -12,7 +11,8 @@ import { TaskList } from "../../components/TaskList";
 import { SearchForm } from "../../components/SearchForm";
 
 export const Todo = () => {
-   const { tasks, filteredTasks, searchTasks } = useContext(TasksContext);
+   const { tasks, filteredTasks, searchTasks, getTasks } =
+      useContext(TasksContext);
 
    const [searchInput, setSearchInput] = useState("");
 
@@ -20,6 +20,10 @@ export const Todo = () => {
       setSearchInput(searchValue);
       searchTasks(searchValue);
    };
+
+   useEffect(() => {
+      getTasks();
+   }, [tasks]);
 
    return (
       <div className={styles.container}>
