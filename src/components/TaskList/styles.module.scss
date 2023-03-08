@@ -67,10 +67,20 @@ table {
    line-height: 0;
    color: var(--green);
    cursor: pointer;
+
+   transition: all ease 0.2s;
+   &:hover {
+      transform: scale(1.1);
+   }
 }
 
 .tableDelete {
    line-height: 0;
    color: var(--red);
    cursor: pointer;
+
+   transition: all ease 0.2s;
+   &:hover {
+      transform: scale(1.1);
+   }
 }

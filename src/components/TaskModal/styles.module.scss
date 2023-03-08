@@ -19,6 +19,7 @@
    width: 80%;
    padding: 1rem;
    background-color: var(--white);
+   color: var(--secondMain);
    border-radius: 0.5rem;
 
    input {
@@ -27,6 +28,7 @@
       border: 2px solid transparent;
       border-radius: 0.5rem;
 
+      font-size: 1.1rem;
       margin-top: 1.5rem;
       margin-left: 0;
    }
@@ -34,22 +36,24 @@
    .addButton {
       width: 100%;
 
-      margin-top: 0.5rem;
-      padding: 0.5rem;
+      margin-top: 0.75rem;
+      padding: 0.6rem;
       border: 0;
       border-radius: 0.5rem;
 
       font-size: 1.1rem;
       font-weight: 600;
+      text-transform: uppercase;
       background-color: var(--secondMain);
       color: var(--white);
+      box-shadow: 0 0 10px #8f8f8f;
 
       cursor: pointer;
 
       transition: all ease 0.2s;
 
       &:hover {
-         filter: brightness(0.7);
+         filter: brightness(0.9);
          transform: scale(1.01);
       }
    }
@@ -84,5 +88,6 @@
 
    &:hover {
       transform: scale(1.05);
+      opacity: 0.7;
    }
 }

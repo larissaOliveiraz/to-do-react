@@ -39,7 +39,7 @@ export const Todo = () => {
                      <strong>{filteredTasks.length}</strong>{" "}
                      {filteredTasks.length > 1 ? "tasks" : "task"}
                   </p>
-                  <TaskList tasksData={filteredTasks} />
+                  <TaskList />
                </div>
             ) : (
                <div>
@@ -47,7 +47,7 @@ export const Todo = () => {
                      <strong>{tasks.length}</strong>{" "}
                      {tasks.length > 1 ? "tasks" : "task"}
                   </p>
-                  <TaskList tasksData={tasks} />
+                  <TaskList />
                </div>
             )}
          </main>

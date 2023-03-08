@@ -24,7 +24,7 @@ export const Header = () => {
                   </div>
                </Dialog.Trigger>
 
-               <TaskModal title="NEW TASK" onAdd task={tasks[0]} />
+               <TaskModal title="NEW TASK" onAdd setIsOpen={() => {}} />
             </Dialog.Root>
          </div>
       </div>

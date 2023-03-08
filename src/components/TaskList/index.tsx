@@ -1,70 +1,70 @@
 import styles from "./styles.module.scss";
 import { PencilSimpleLine, TrashSimple } from "@phosphor-icons/react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TasksContext } from "../../contexts/TasksContext";
 import * as Dialog from "@radix-ui/react-dialog";
 import { TaskModal } from "../TaskModal";
 import { Todo } from "../../types/Todo";
+import { Tasks } from "../../utils/Tasks";
 
-type Props = {
-   tasksData: Todo[];
-};
+export const TaskList = () => {
+   const { tasks, getTasks, deleteTask, editTask, selectTask } =
+      useContext(TasksContext);
+   const [isOpen, setIsOpen] = useState(false);
 
-export const TaskList = ({ tasksData }: Props) => {
-   const { getTasks, deleteTask, editChecked } = useContext(TasksContext);
+   const handleChecked = async (taskId: number, task: Todo) => {
+      editTask(taskId, { ...task, checked: !task.checked });
+   };
 
-   const handleDeleteTask = (taskId: number, task: Todo) => {
-      task.checked = false;
-      deleteTask(taskId);
+   useEffect(() => {
       getTasks();
-   };
-
-   const handleChecked = async (
-      taskId: number,
-      taskName: string,
-      taskChecked: boolean
-   ) => {
-      editChecked(taskId, taskName, taskChecked);
-   };
+   }, [Tasks]);
 
    return (
       <div className={styles.scrollList}>
          <table>
             <tbody>
-               {tasksData.map((task) => (
-                  <tr className={styles.tableRow} key={task.id}>
-                     <td className={styles.tableData}>
+               {tasks.map((task) => (
+                  <tr key={task.id} className={`${styles.tableRow} row`}>
+                     <td
+                        className={styles.tableData}
+                        onClick={() => selectTask(task)}
+                     >
                         <input
                            type="checkbox"
                            id={task.id.toString()}
                            name={task.description}
                            className={styles.checkboxInput}
                            checked={task.checked}
-                           onChange={() =>
-                              handleChecked(
-                                 task.id,
-                                 task.description,
-                                 task.checked
-                              )
-                           }
+                           onChange={() => handleChecked(task.id, task)}
                         />
                         <label htmlFor={task.id.toString()}>
                            {task.description}
                         </label>
                      </td>
                      <td className={styles.tableIcons}>
-                        <Dialog.Root>
-                           <Dialog.Trigger className={styles.editTrigger}>
+                        <Dialog.Root open={isOpen}>
+                           <Dialog.Trigger
+                              className={styles.editTrigger}
+                              onClick={() => {
+                                 setIsOpen(true);
+                                 selectTask(task);
+                              }}
+                           >
                               <div className={styles.tableEdit}>
                                  <PencilSimpleLine size={24} />
                               </div>
                            </Dialog.Trigger>
 
-                           <TaskModal title="UPDATE TASK" task={task} onEdit />
+                           <TaskModal
+                              title="UPDATE TASK"
+                              onEdit
+                              setIsOpen={setIsOpen}
+                           />
                         </Dialog.Root>
                         <div
                            className={styles.tableDelete}
-                           onClick={() => handleDeleteTask(task.id, task)}
+                           onClick={() => deleteTask(task.id)}
                         >
                            <TrashSimple size={24} />
                         </div>
